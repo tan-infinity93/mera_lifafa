@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Envelope Designer</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            
+            /* Light mode variables */
+            --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --panel-bg: rgba(255, 255, 255, 0.95);
+            --panel-border: rgba(255, 255, 255, 0.2);
+            --text-color: #333;
+            --design-item-bg: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            --design-item-border: #667eea;
+            --control-panel-bg: rgba(255, 255, 255, 0.9);
+            --canvas-bg: white;
+            --canvas-border: #ddd;
+        }
+
+        [data-theme="dark"] {
+            /* Dark mode variables - Subtle and easy on eyes */
+            --bg-gradient: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            --panel-bg: rgba(52, 73, 94, 0.85);
+            --panel-border: rgba(255, 255, 255, 0.08);
+            --text-color: #ecf0f1;
+            --design-item-bg: linear-gradient(135deg, #546778 0%, #5a6c7d 100%);
+            --design-item-border: #7fb3d3;
+            --control-panel-bg: rgba(52, 73, 94, 0.8);
+            --canvas-bg: white;
+            --canvas-border: #ddd;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+
+        .design-panel {
+            background: var(--panel-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            height: calc(100vh - 40px);
+            overflow-y: auto;
+            border: 1px solid var(--panel-border);
+            transition: all 0.3s ease;
+        }
+
+        .envelope-canvas {
+            background: var(--canvas-bg);
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            position: relative;
+            width: 100%;
+            height: 400px;
+            margin: 20px 0;
+            overflow: hidden;
+            border: 2px dashed var(--canvas-border);
+            transition: all 0.3s ease;
+        }
+
+        .envelope-canvas:hover {
+            border-color: #667eea;
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.2);
+        }
+
+        .envelope-element {
+            position: absolute;
+            cursor: move;
+            user-select: none;
+            border: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .envelope-element:hover {
+            border-color: #667eea;
+            transform: scale(1.02);
+        }
+
+        .envelope-element.selected {
+            border-color: #f5576c;
+            box-shadow: 0 0 15px rgba(245, 87, 108, 0.4);
+        }
+
+        .design-item {
+            cursor: grab;
+            padding: 15px;
+            margin: 10px 0;
+            background: var(--design-item-bg);
+            border-radius: 12px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .design-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+            transition: left 0.5s;
+        }
+
+        [data-theme="dark"] .design-item::before {
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+        }
+
+        .design-item:hover {
+            transform: translateY(-3px);
+            border-color: var(--design-item-border);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        [data-theme="dark"] .design-item:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            border-color: #7fb3d3;
+        }
+
+        .design-item:hover::before {
+            left: 100%;
+        }
+
+        .design-item:active {
+            cursor: grabbing;
+            transform: scale(0.98);
+        }
+
+        .menu-header {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 20px;
+            margin: -15px -15px 20px -15px;
+            border-radius: 20px 20px 0 0;
+            text-align: center;
+        }
+
+        .submenu-header {
+            background: var(--secondary-gradient);
+            color: white;
+            padding: 12px 15px;
+            margin: 15px -15px 15px -15px;
+            border-radius: 10px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .control-panel {
+            background: var(--control-panel-bg);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] .control-panel {
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .export-btn {
+            background: var(--success-gradient);
+            border: none;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .export-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(79, 172, 254, 0.4);
+            color: white;
+        }
+
+        [data-theme="dark"] .export-btn:hover {
+            box-shadow: 0 8px 20px rgba(79, 172, 254, 0.3);
+        }
+
+        .text-element {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-family: 'Arial', sans-serif;
+            min-width: 100px;
+            backdrop-filter: blur(5px);
+        }
+
+        .shape-element {
+            border-radius: 50%;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+        }
+
+        .pattern-element {
+            background-size: cover;
+            background-position: center;
+            border-radius: 8px;
+        }
+
+        .envelope-canvas .watermark {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 12px;
+            color: rgba(0, 0, 0, 0.3);
+            pointer-events: none;
+        }
+
+        .color-picker {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 3px solid white;
+            cursor: pointer;
+            margin: 5px;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .color-picker:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .envelope-canvas {
+                height: 300px;
+            }
+            
+            .design-panel {
+                height: auto;
+                margin-bottom: 20px;
+            }
+        }
+
+        .scroll-container {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .scroll-container::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .scroll-container::-webkit-scrollbar-track {
+            background: var(--design-item-bg);
+            border-radius: 10px;
+        }
+
+        .theme-toggle {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 25px;
+            padding: 8px 15px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            font-size: 14px;
+            backdrop-filter: blur(10px);
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: scale(1.05);
+        }
+
+        [data-theme="dark"] .theme-toggle {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        [data-theme="dark"] .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.18);
+        }
+
+        /* Form controls styling for dark mode - More subtle */
+        [data-theme="dark"] .form-control,
+        [data-theme="dark"] .form-select,
+        [data-theme="dark"] .form-range {
+            background-color: rgba(84, 103, 120, 0.6);
+            border-color: rgba(255, 255, 255, 0.15);
+            color: var(--text-color);
+        }
+
+        [data-theme="dark"] .form-control:focus,
+        [data-theme="dark"] .form-select:focus {
+            background-color: rgba(84, 103, 120, 0.8);
+            border-color: #7fb3d3;
+            color: var(--text-color);
+            box-shadow: 0 0 0 0.2rem rgba(127, 179, 211, 0.25);
+        }
+
+        [data-theme="dark"] .form-label {
+            color: var(--text-color);
+            font-weight: 500;
+        }
+
+        [data-theme="dark"] .text-muted {
+            color: rgba(236, 240, 241, 0.7) !important;
+        }
+
+        /* Subtle theme transition */
+        * {
+            transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease !important;
+        }
+
+        .scroll-container::-webkit-scrollbar-thumb {
+            background: var(--primary-gradient);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid py-3">
+        <div class="row">
+            <!-- Left Panel - Design Menu -->
+            <div class="col-lg-3 col-md-4">
+                <div class="design-panel p-3">
+                    <div class="menu-header">
+                        <div class="theme-toggle" onclick="toggleTheme()">
+                            <i class="fas fa-moon" id="themeIcon"></i>
+                            <span id="themeText">Dark</span>
+                        </div>
+                        <h4><i class="fas fa-palette me-2"></i>Envelope Designer</h4>
+                        <p class="mb-0 small">Drag & Drop to Create</p>
+                    </div>
+
+                    <!-- Text Elements -->
+                    <div class="submenu-header">
+                        <span><i class="fas fa-font me-2"></i>Text Elements</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="scroll-container">
+                        <div class="design-item text-item" data-type="text" data-content="Your Name">
+                            <i class="fas fa-heading me-2"></i>Heading Text
+                        </div>
+                        <div class="design-item text-item" data-type="text" data-content="123 Main Street">
+                            <i class="fas fa-map-marker-alt me-2"></i>Address Line
+                        </div>
+                        <div class="design-item text-item" data-type="text" data-content="Custom Message">
+                            <i class="fas fa-comment me-2"></i>Custom Text
+                        </div>
+                        <div class="design-item text-item" data-type="text" data-content="❤️ With Love">
+                            <i class="fas fa-heart me-2"></i>Decorative Text
+                        </div>
+                    </div>
+
+                    <!-- Shapes -->
+                    <div class="submenu-header">
+                        <span><i class="fas fa-shapes me-2"></i>Shapes</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="scroll-container">
+                        <div class="design-item shape-item" data-type="shape" data-shape="circle">
+                            <i class="fas fa-circle me-2"></i>Circle
+                        </div>
+                        <div class="design-item shape-item" data-type="shape" data-shape="square">
+                            <i class="fas fa-square me-2"></i>Square
+                        </div>
+                        <div class="design-item shape-item" data-type="shape" data-shape="heart">
+                            <i class="fas fa-heart me-2"></i>Heart
+                        </div>
+                        <div class="design-item shape-item" data-type="shape" data-shape="star">
+                            <i class="fas fa-star me-2"></i>Star
+                        </div>
+                    </div>
+
+                    <!-- Patterns -->
+                    <div class="submenu-header">
+                        <span><i class="fas fa-texture me-2"></i>Patterns</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="scroll-container">
+                        <div class="design-item pattern-item" data-type="pattern" data-pattern="floral">
+                            <i class="fas fa-leaf me-2"></i>Floral Pattern
+                        </div>
+                        <div class="design-item pattern-item" data-type="pattern" data-pattern="geometric">
+                            <i class="fas fa-th me-2"></i>Geometric
+                        </div>
+                        <div class="design-item pattern-item" data-type="pattern" data-pattern="vintage">
+                            <i class="fas fa-scroll me-2"></i>Vintage Border
+                        </div>
+                        <div class="design-item pattern-item" data-type="pattern" data-pattern="modern">
+                            <i class="fas fa-layer-group me-2"></i>Modern Lines
+                        </div>
+                    </div>
+
+                    <!-- Colors -->
+                    <div class="submenu-header">
+                        <span><i class="fas fa-palette me-2"></i>Colors</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="d-flex flex-wrap justify-content-center">
+                        <div class="color-picker" style="background: #ff6b6b" data-color="#ff6b6b"></div>
+                        <div class="color-picker" style="background: #4ecdc4" data-color="#4ecdc4"></div>
+                        <div class="color-picker" style="background: #45b7d1" data-color="#45b7d1"></div>
+                        <div class="color-picker" style="background: #96ceb4" data-color="#96ceb4"></div>
+                        <div class="color-picker" style="background: #ffeaa7" data-color="#ffeaa7"></div>
+                        <div class="color-picker" style="background: #dda0dd" data-color="#dda0dd"></div>
+                        <div class="color-picker" style="background: #98d8c8" data-color="#98d8c8"></div>
+                        <div class="color-picker" style="background: #f7dc6f" data-color="#f7dc6f"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Panel - Canvas and Controls -->
+            <div class="col-lg-9 col-md-8">
+                <div class="design-panel p-4">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h3><i class="fas fa-envelope me-2"></i>Design Canvas</h3>
+                        <div>
+                            <button class="btn export-btn me-2" onclick="clearCanvas()">
+                                <i class="fas fa-trash me-2"></i>Clear
+                            </button>
+                            <button class="btn export-btn" onclick="exportDesign()">
+                                <i class="fas fa-download me-2"></i>Export
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Envelope Canvas -->
+                    <div class="envelope-canvas" id="envelopeCanvas">
+                        <div class="watermark">Custom Envelope Designer</div>
+                    </div>
+
+                    <!-- Control Panel -->
+                    <div class="control-panel">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label class="form-label fw-bold">Font Size</label>
+                                <input type="range" class="form-range" id="fontSizeRange" min="12" max="48" value="16">
+                                <small class="text-muted">16px</small>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label fw-bold">Element Size</label>
+                                <input type="range" class="form-range" id="elementSizeRange" min="20" max="150" value="50">
+                                <small class="text-muted">50px</small>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label fw-bold">Rotation</label>
+                                <input type="range" class="form-range" id="rotationRange" min="0" max="360" value="0">
+                                <small class="text-muted">0°</small>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label fw-bold">Opacity</label>
+                                <input type="range" class="form-range" id="opacityRange" min="0.1" max="1" step="0.1" value="1">
+                                <small class="text-muted">100%</small>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold">Edit Text</label>
+                                <input type="text" class="form-control" id="textEditor" placeholder="Enter text...">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-bold">Font Family</label>
+                                <select class="form-select" id="fontFamily">
+                                    <option value="Arial">Arial</option>
+                                    <option value="Georgia">Georgia</option>
+                                    <option value="Times New Roman">Times New Roman</option>
+                                    <option value="Courier New">Courier New</option>
+                                    <option value="Verdana">Verdana</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script>
+        let selectedElement = null;
+        let elementCounter = 0;
+        let isDragging = false;
+        let dragOffset = { x: 0, y: 0 };
+
+        // Initialize drag and drop
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeDragAndDrop();
+            initializeControls();
+            initializeTheme();
+        });
+
+        function initializeTheme() {
+            // Check for saved theme preference or default to light mode
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            updateThemeToggle(savedTheme);
+        }
+
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeToggle(newTheme);
+        }
+
+        function updateThemeToggle(theme) {
+            const themeIcon = document.getElementById('themeIcon');
+            const themeText = document.getElementById('themeText');
+            
+            if (theme === 'dark') {
+                themeIcon.className = 'fas fa-sun';
+                themeText.textContent = 'Light';
+            } else {
+                themeIcon.className = 'fas fa-moon';
+                themeText.textContent = 'Dark';
+            }
+        }
+
+        function initializeDragAndDrop() {
+            const designItems = document.querySelectorAll('.design-item');
+            const canvas = document.getElementById('envelopeCanvas');
+
+            designItems.forEach(item => {
+                item.addEventListener('dragstart', handleDragStart);
+                item.addEventListener('dragend', handleDragEnd);
+                item.setAttribute('draggable', true);
+            });
+
+            canvas.addEventListener('dragover', handleDragOver);
+            canvas.addEventListener('drop', handleDrop);
+        }
+
+        function handleDragStart(e) {
+            e.dataTransfer.setData('text/plain', '');
+            e.dataTransfer.effectAllowed = 'copy';
+            this.style.opacity = '0.5';
+        }
+
+        function handleDragEnd(e) {
+            this.style.opacity = '1';
+        }
+
+        function handleDragOver(e) {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'copy';
+        }
+
+        function handleDrop(e) {
+            e.preventDefault();
+            const rect = e.currentTarget.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const draggedElement = document.querySelector('.design-item[style*="opacity: 0.5"]');
+            if (draggedElement) {
+                createElement(draggedElement, x, y);
+                draggedElement.style.opacity = '1';
+            }
+        }
+
+        function createElement(sourceElement, x, y) {
+            const canvas = document.getElementById('envelopeCanvas');
+            const elementId = `element_${++elementCounter}`;
+            let element;
+
+            const type = sourceElement.dataset.type;
+            
+            if (type === 'text') {
+                element = document.createElement('div');
+                element.className = 'envelope-element text-element';
+                element.textContent = sourceElement.dataset.content;
+                element.style.fontSize = '16px';
+                element.style.fontFamily = 'Arial';
+            } else if (type === 'shape') {
+                element = document.createElement('div');
+                element.className = 'envelope-element shape-element';
+                const shape = sourceElement.dataset.shape;
+                element.style.width = '50px';
+                element.style.height = '50px';
+                
+                if (shape === 'square') {
+                    element.style.borderRadius = '0';
+                } else if (shape === 'heart') {
+                    element.innerHTML = '❤️';
+                    element.style.fontSize = '30px';
+                    element.style.background = 'transparent';
+                    element.style.display = 'flex';
+                    element.style.alignItems = 'center';
+                    element.style.justifyContent = 'center';
+                } else if (shape === 'star') {
+                    element.innerHTML = '⭐';
+                    element.style.fontSize = '30px';
+                    element.style.background = 'transparent';
+                    element.style.display = 'flex';
+                    element.style.alignItems = 'center';
+                    element.style.justifyContent = 'center';
+                }
+            } else if (type === 'pattern') {
+                element = document.createElement('div');
+                element.className = 'envelope-element pattern-element';
+                element.style.width = '100px';
+                element.style.height = '50px';
+                
+                const pattern = sourceElement.dataset.pattern;
+                if (pattern === 'floral') {
+                    element.style.background = 'linear-gradient(45deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%)';
+                    element.innerHTML = '<div style="padding: 10px; color: white;">🌸🌿🌸</div>';
+                } else if (pattern === 'geometric') {
+                    element.style.background = 'repeating-linear-gradient(45deg, #667eea 0px, #667eea 10px, #764ba2 10px, #764ba2 20px)';
+                } else if (pattern === 'vintage') {
+                    element.style.background = '#f4f1de';
+                    element.style.border = '3px double #8b4513';
+                    element.innerHTML = '<div style="padding: 5px; text-align: center; font-size: 12px;">✦ ✧ ✦</div>';
+                } else if (pattern === 'modern') {
+                    element.style.background = 'linear-gradient(90deg, transparent 40%, #667eea 50%, transparent 60%)';
+                    element.style.borderTop = '2px solid #667eea';
+                    element.style.borderBottom = '2px solid #667eea';
+                }
+            }
+
+            element.id = elementId;
+            element.style.left = Math.max(0, Math.min(x - 25, canvas.clientWidth - 100)) + 'px';
+            element.style.top = Math.max(0, Math.min(y - 25, canvas.clientHeight - 50)) + 'px';
+            
+            element.addEventListener('click', selectElement);
+            element.addEventListener('mousedown', startDrag);
+            
+            canvas.appendChild(element);
+            selectElement({ target: element });
+        }
+
+        function selectElement(e) {
+            if (selectedElement) {
+                selectedElement.classList.remove('selected');
+            }
+            selectedElement = e.target;
+            selectedElement.classList.add('selected');
+            updateControls();
+        }
+
+        function startDrag(e) {
+            if (e.target !== selectedElement) return;
+            
+            isDragging = true;
+            const rect = selectedElement.getBoundingClientRect();
+            const canvasRect = document.getElementById('envelopeCanvas').getBoundingClientRect();
+            
+            dragOffset.x = e.clientX - rect.left;
+            dragOffset.y = e.clientY - rect.top;
+            
+            document.addEventListener('mousemove', drag);
+            document.addEventListener('mouseup', stopDrag);
+            
+            e.preventDefault();
+        }
+
+        function drag(e) {
+            if (!isDragging || !selectedElement) return;
+            
+            const canvas = document.getElementById('envelopeCanvas');
+            const canvasRect = canvas.getBoundingClientRect();
+            
+            let x = e.clientX - canvasRect.left - dragOffset.x;
+            let y = e.clientY - canvasRect.top - dragOffset.y;
+            
+            x = Math.max(0, Math.min(x, canvas.clientWidth - selectedElement.offsetWidth));
+            y = Math.max(0, Math.min(y, canvas.clientHeight - selectedElement.offsetHeight));
+            
+            selectedElement.style.left = x + 'px';
+            selectedElement.style.top = y + 'px';
+        }
+
+        function stopDrag() {
+            isDragging = false;
+            document.removeEventListener('mousemove', drag);
+            document.removeEventListener('mouseup', stopDrag);
+        }
+
+        function initializeControls() {
+            const fontSizeRange = document.getElementById('fontSizeRange');
+            const elementSizeRange = document.getElementById('elementSizeRange');
+            const rotationRange = document.getElementById('rotationRange');
+            const opacityRange = document.getElementById('opacityRange');
+            const textEditor = document.getElementById('textEditor');
+            const fontFamily = document.getElementById('fontFamily');
+
+            fontSizeRange.addEventListener('input', updateFontSize);
+            elementSizeRange.addEventListener('input', updateElementSize);
+            rotationRange.addEventListener('input', updateRotation);
+            opacityRange.addEventListener('input', updateOpacity);
+            textEditor.addEventListener('input', updateText);
+            fontFamily.addEventListener('change', updateFontFamily);
+
+            // Color picker functionality
+            document.querySelectorAll('.color-picker').forEach(picker => {
+                picker.addEventListener('click', function() {
+                    if (selectedElement) {
+                        const color = this.dataset.color;
+                        if (selectedElement.classList.contains('text-element')) {
+                            selectedElement.style.color = color;
+                        } else {
+                            selectedElement.style.backgroundColor = color;
+                        }
+                    }
+                });
+            });
+        }
+
+        function updateControls() {
+            if (!selectedElement) return;
+
+            const textEditor = document.getElementById('textEditor');
+            if (selectedElement.classList.contains('text-element')) {
+                textEditor.value = selectedElement.textContent;
+                textEditor.style.display = 'block';
+            } else {
+                textEditor.style.display = 'none';
+            }
+        }
+
+        function updateFontSize() {
+            const size = this.value;
+            this.nextElementSibling.textContent = size + 'px';
+            if (selectedElement && selectedElement.classList.contains('text-element')) {
+                selectedElement.style.fontSize = size + 'px';
+            }
+        }
+
+        function updateElementSize() {
+            const size = this.value;
+            this.nextElementSibling.textContent = size + 'px';
+            if (selectedElement) {
+                if (selectedElement.classList.contains('shape-element') || selectedElement.classList.contains('pattern-element')) {
+                    selectedElement.style.width = size + 'px';
+                    selectedElement.style.height = size + 'px';
+                }
+            }
+        }
+
+        function updateRotation() {
+            const rotation = this.value;
+            this.nextElementSibling.textContent = rotation + '°';
+            if (selectedElement) {
+                selectedElement.style.transform = `rotate(${rotation}deg)`;
+            }
+        }
+
+        function updateOpacity() {
+            const opacity = this.value;
+            this.nextElementSibling.textContent = Math.round(opacity * 100) + '%';
+            if (selectedElement) {
+                selectedElement.style.opacity = opacity;
+            }
+        }
+
+        function updateText() {
+            if (selectedElement && selectedElement.classList.contains('text-element')) {
+                selectedElement.textContent = this.value;
+            }
+        }
+
+        function updateFontFamily() {
+            if (selectedElement && selectedElement.classList.contains('text-element')) {
+                selectedElement.style.fontFamily = this.value;
+            }
+        }
+
+        function clearCanvas() {
+            const canvas = document.getElementById('envelopeCanvas');
+            const elements = canvas.querySelectorAll('.envelope-element');
+            elements.forEach(element => element.remove());
+            selectedElement = null;
+        }
+
+        function exportDesign() {
+            const canvas = document.getElementById('envelopeCanvas');
+            
+            // Hide selection borders temporarily
+            const selected = canvas.querySelector('.selected');
+            if (selected) {
+                selected.classList.remove('selected');
+            }
+            
+            html2canvas(canvas, {
+                backgroundColor: '#ffffff',
+                scale: 2,
+                logging: false,
+                useCORS: true
+            }).then(canvasElement => {
+                // Restore selection
+                if (selected) {
+                    selected.classList.add('selected');
+                }
+                
+                // Create download link
+                const link = document.createElement('a');
+                link.download = 'custom-envelope-design.png';
+                link.href = canvasElement.toDataURL();
+                
+                // Trigger download
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                
+                // Show success message
+                const toast = document.createElement('div');
+                toast.className = 'toast show position-fixed top-0 end-0 m-3';
+                toast.innerHTML = `
+                    <div class="toast-header bg-success text-white">
+                        <i class="fas fa-check-circle me-2"></i>
+                        <strong>Success!</strong>
+                    </div>
+                    <div class="toast-body">
+                        Your envelope design has been exported successfully!
+                    </div>
+                `;
+                document.body.appendChild(toast);
+                
+                setTimeout(() => {
+                    toast.remove();
+                }, 3000);
+            });
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Delete' && selectedElement) {
+                selectedElement.remove();
+                selectedElement = null;
+            }
+            
+            if (e.ctrlKey && e.key === 'e') {
+                e.preventDefault();
+                exportDesign();
+            }
+            
+            if (e.ctrlKey && e.key === 'c' && selectedElement) {
+                e.preventDefault();
+                clearCanvas();
+            }
+        });
+    </script>
+</body>
+</html>
