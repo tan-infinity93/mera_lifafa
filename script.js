@@ -94,7 +94,8 @@ function createElement(sourceElement, x, y) {
         element.textContent = sourceElement.dataset.content;
         element.style.fontSize = '16px';
         element.style.fontFamily = 'Arial';
-    } else if (type === 'shape') {
+    } 
+    else if (type === 'shape') {
         element = document.createElement('div');
         element.className = 'envelope-element shape-element';
         const shape = sourceElement.dataset.shape;
@@ -103,14 +104,16 @@ function createElement(sourceElement, x, y) {
         
         if (shape === 'square') {
             element.style.borderRadius = '0';
-        } else if (shape === 'heart') {
+        } 
+        else if (shape === 'heart') {
             element.innerHTML = '❤️';
             element.style.fontSize = '30px';
             element.style.background = 'transparent';
             element.style.display = 'flex';
             element.style.alignItems = 'center';
             element.style.justifyContent = 'center';
-        } else if (shape === 'star') {
+        } 
+        else if (shape === 'star') {
             element.innerHTML = '⭐';
             element.style.fontSize = '30px';
             element.style.background = 'transparent';
@@ -118,23 +121,31 @@ function createElement(sourceElement, x, y) {
             element.style.alignItems = 'center';
             element.style.justifyContent = 'center';
         }
-    } else if (type === 'pattern') {
+    } 
+    else if (type === 'pattern') {
         element = document.createElement('div');
         element.className = 'envelope-element pattern-element';
         element.style.width = '100px';
-        element.style.height = '50px';
+        element.style.height = '100px';
         
         const pattern = sourceElement.dataset.pattern;
         if (pattern === 'floral') {
-            element.style.background = 'linear-gradient(45deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%)';
-            element.innerHTML = '<div style="padding: 10px; color: white;">🌸🌿🌸</div>';
-        } else if (pattern === 'geometric') {
+            element.innerHTML = '🌸';
+            element.style.fontSize = '100px';
+            element.style.display = 'flex';
+            element.style.alignItems = 'center';
+            element.style.justifyContent = 'center';
+        } 
+        else if (pattern === 'geometric') {
             element.style.background = 'repeating-linear-gradient(45deg, #667eea 0px, #667eea 10px, #764ba2 10px, #764ba2 20px)';
-        } else if (pattern === 'vintage') {
+            element.style.fontSize = '100px';
+        } 
+        else if (pattern === 'vintage') {
             element.style.background = '#f4f1de';
             element.style.border = '3px double #8b4513';
             element.innerHTML = '<div style="padding: 5px; text-align: center; font-size: 12px;">✦ ✧ ✦</div>';
-        } else if (pattern === 'modern') {
+        } 
+        else if (pattern === 'modern') {
             element.style.background = 'linear-gradient(90deg, transparent 40%, #667eea 50%, transparent 60%)';
             element.style.borderTop = '2px solid #667eea';
             element.style.borderBottom = '2px solid #667eea';
