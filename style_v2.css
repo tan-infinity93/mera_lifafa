@@ -150,6 +150,7 @@
   padding: 5px 0;
   z-index: 1000;
 }
+
 #customMenu button {
   display: block;
   width: 100%;
@@ -159,6 +160,7 @@
   text-align: left;
   cursor: pointer;
 }
+
 #customMenu button:hover {
   background: #eee;
 }
