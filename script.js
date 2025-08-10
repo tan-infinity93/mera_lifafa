@@ -139,16 +139,27 @@ function createElement(sourceElement, x, y) {
         else if (pattern === 'geometric') {
             element.style.background = 'repeating-linear-gradient(45deg, #667eea 0px, #667eea 10px, #764ba2 10px, #764ba2 20px)';
             element.style.fontSize = '100px';
+            element.style.display = 'flex';
+            element.style.alignItems = 'center';
+            element.style.justifyContent = 'center';
         } 
-        else if (pattern === 'vintage') {
+        else if (pattern === 'compass-star') {
             element.style.background = '#f4f1de';
             element.style.border = '3px double #8b4513';
-            element.innerHTML = '<div style="padding: 5px; text-align: center; font-size: 12px;">✦ ✧ ✦</div>';
+            // element.innerHTML = '<div style="padding: 5px; text-align: center; font-size: 12px;">✦ ✧ ✦</div>';
+            // element.innerHTML = '✦ ✧ ✦';
+            element.innerHTML = '✦';
+            element.style.fontSize = '100px';
+            element.style.display = 'flex';
+            element.style.alignItems = 'center';
+            element.style.justifyContent = 'center';
         } 
-        else if (pattern === 'modern') {
-            element.style.background = 'linear-gradient(90deg, transparent 40%, #667eea 50%, transparent 60%)';
-            element.style.borderTop = '2px solid #667eea';
-            element.style.borderBottom = '2px solid #667eea';
+        else if (pattern === 'snowflake') {
+            element.innerHTML = '❄';
+            element.style.fontSize = '100px';
+            element.style.display = 'flex';
+            element.style.alignItems = 'center';
+            element.style.justifyContent = 'center';
         }
     }
 
@@ -161,6 +172,51 @@ function createElement(sourceElement, x, y) {
     
     canvas.appendChild(element);
     selectElement({ target: element });
+}
+
+let targetElement = null;
+let menu = document.getElementById('customMenu');
+
+function addContextMenu(e) {
+    // let targetElement = null;
+    // const menu = document.getElementById('customMenu');
+
+    document.addEventListener('contextmenu', function(e) {
+      if (e.target.classList.contains('envelope-element')) {
+        e.preventDefault();
+        targetElement = e.target;
+        menu.style.top = e.pageY + 'px';
+        menu.style.left = e.pageX + 'px';
+        menu.style.display = 'block';
+      } 
+      else {
+        menu.style.display = 'none';
+      }
+    });
+}
+
+addContextMenu();
+
+let removeBtn = document.getElementById('removeBtn');
+
+function removeElement() {
+
+    removeBtn.addEventListener('click', function() {
+      if (targetElement) {
+        alert('removing targetElement');
+        targetElement.remove();
+        selectedElement = null;
+        menu.style.display = 'none';
+      }
+    });
+}
+
+removeElement();
+
+function hideContextMenu() {
+    document.addEventListener('click', function() {
+      menu.style.display = 'none';
+    });
 }
 
 function selectElement(e) {

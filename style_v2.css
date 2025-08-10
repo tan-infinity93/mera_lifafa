@@ -141,6 +141,28 @@
     box-shadow: 0 0 6px #39ff14;
 }
 
+#customMenu {
+  display: none;
+  position: absolute;
+  background: white;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  padding: 5px 0;
+  z-index: 1000;
+}
+#customMenu button {
+  display: block;
+  width: 100%;
+  border: none;
+  background: none;
+  padding: 6px 12px;
+  text-align: left;
+  cursor: pointer;
+}
+#customMenu button:hover {
+  background: #eee;
+}
+
 /* :root {
     --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
