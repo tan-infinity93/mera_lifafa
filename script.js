@@ -203,7 +203,7 @@ function removeElement() {
 
     removeBtn.addEventListener('click', function() {
       if (targetElement) {
-        alert('removing targetElement');
+        // alert('removing targetElement');
         targetElement.remove();
         selectedElement = null;
         menu.style.display = 'none';
