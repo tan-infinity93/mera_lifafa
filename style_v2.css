@@ -43,7 +43,7 @@
 }
 
 [data-theme="dark"] .watermark {
-    color: rgb(255, 255, 255);
+    color: rgba(255, 255, 255, 1.0);
 }
 
 [data-theme="dark"] .menu-header {
@@ -327,10 +327,7 @@ body {
     background: var(--secondary-gradient);
     color: white;
     padding: 12px 15px;
-    /*padding: 15px 15px;*/
-    /*margin: 15px -15px 15px -15px;*/
-    margin: 15px -15px 15px -15px;
-    /*border-radius: 10px;*/
+    margin: 15px -10px 15px -10px;
     border-radius: 5px;
     font-weight: 600;
     display: flex;
@@ -382,7 +379,7 @@ body {
     border: none;
     color: white;
     /*padding: 12px 30px;*/
-    padding: 6px 20px;
+    padding: 6px 10px;
     border-radius: 25px;
     font-weight: 600;
     transition: all 0.3s ease;

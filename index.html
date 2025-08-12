@@ -14,14 +14,33 @@
     <div id="customMenu">
       <button id="removeBtn">Remove</button>
     </div>
+
+    <div class="modal fade" id="linkModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Submit Feedback</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body p-0">
+            <iframe id="linkFrame" style="width:100%;height:80vh;border:0;"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="container-fluid py-3">
         <div class="row">
             <!-- Left Panel - Design Menu -->
             <div class="col-lg-3 col-md-3">
                 <div class="design-panel p-3">
                     <div class="menu-header">
-                        <h4><i class="fas fa-palette me-2"></i>Lifafa Designer</h4>
-                        <p class="mb-0 small">Drag & Drop to Create</p>
+                        <img src="logo_bw.png" alt="Logo" style="max-width: 100%; height: auto; margin-right: 8px;">
+                        <!-- <h4><i class="fas fa-palette me-2"></i>Lifafa Designer. </h4> -->
+                        <!-- <h4>Lifafa Designer. </h4>
+                        <p class="mb-0 small">Drag & Drop to Create</p> -->
+                        <p class="mt-2 mb-0 small"><a href="https://forms.gle/EkcfLnTTXUfxAP1q7" id="give-feedback">Click here to give feedback</a></p>
+                        <p class="mb-0 small"><i class="fas fa-envelope"></i> us on design@meralifafa.in</p>
                     </div>
 
                     <!-- Text Elements -->
@@ -106,7 +125,30 @@
             <!-- Right Panel - Canvas and Controls -->
             <div class="col-lg-6 col-md-6">
                 <div class="design-panel p-3">
-                    <div class="d-flex justify-content-between align-items-center mb-4">
+                    <!-- <div class="d-flex justify-content-between align-items-center mb-4"> -->
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4">
+                            <h3></i>Design Canvas</h3>
+                        </div>
+                        <div class="col-lg-8 col-md-8 ps-5">
+                            <button class="btn btn-sm export-btn me-1" onclick="toggleTheme()">
+                                <i class="fas fa-moon me-2" id="themeIcon"></i>&nbsp;Dark
+                            </button>
+                            <button class="btn btn-sm export-btn me-1" onclick="clearCanvas()">
+                                <i class="fas fa-trash me-2"></i>Clear
+                            </button>
+                            <button class="btn btn-sm export-btn me-1" onclick="exportDesign()">
+                                <i class="fas fa-download me-2"></i>Export
+                            </button>
+                            <button class="btn btn-sm export-btn me-1" onclick="exportDesign2()">
+                                <i class="fas fa-print me-2"></i>Print
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <p class="mb-0x small">Drag & Drop to Create</p>
+                    </div>
+                    <!-- <div class="">
                         <h3><i class="fas fa-envelope me-2"></i>Design Canvas</h3>
                         <div>
                             <button class="btn btn-sm export-btn me-2" onclick="toggleTheme()">
@@ -118,8 +160,13 @@
                             <button class="btn btn-sm export-btn me-2" onclick="exportDesign()">
                                 <i class="fas fa-download me-2"></i>Export
                             </button>
+                            <button class="btn btn-sm export-btn me-2" onclick="exportDesign2()">
+                                <i class="fas fa-print me-2"></i>Print
+                            </button>
                         </div>
                     </div>
+
+                    <p class="mb-0x small">Drag & Drop to Create</p> -->
 
                     <!-- Envelope Canvas -->
                     <div class="envelope-canvas" id="envelopeCanvas">
