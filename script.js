@@ -195,6 +195,7 @@ function addContextMenu(e) {
     });
 }
 
+// Create Sexy Context Menu:
 addContextMenu();
 
 let removeBtn = document.getElementById('removeBtn');
@@ -429,3 +430,17 @@ document.addEventListener('keydown', function(e) {
         clearCanvas();
     }
 });
+
+document.getElementById("give-feedback").addEventListener("click", function (event) {
+  
+  event.preventDefault();
+
+  let link = "https://forms.gle/EkcfLnTTXUfxAP1q7"; // Your link here
+  document.getElementById("linkFrame").src = link;
+
+  // Show the modal (Bootstrap 5)
+  let myModal = new bootstrap.Modal(document.getElementById("linkModal"));
+  myModal.show();
+});
+
+
