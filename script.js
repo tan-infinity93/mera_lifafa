@@ -161,6 +161,52 @@ function createElement(sourceElement, x, y) {
             element.style.alignItems = 'center';
             element.style.justifyContent = 'center';
         }
+        else if (pattern === 'ganesha') {
+            let ganeshaArt = `
+                            ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣤⣤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+            ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⠟⢁⣤⡙⠻⣷⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+            ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⡏⠀⡾⣻⢿⣦⠘⣿⣷⣦⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+            ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣾⡁⢸⣇⠿⡇⣿⢀⡼⢸⣿⣿⣦⣤⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+            ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣴⠿⠛⠿⣧⣀⣛⣷⣧⣷⣚⣥⠞⣹⡿⠿⠿⢿⣷⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+            ⠀⠀⠀⠀⠀⠀⠀⣀⡀⠀⠀⠀⠀⠀⣼⠁⠀⣠⣶⠿⠛⢛⣛⣋⣭⣭⣴⠿⢫⡷⣦⡀⠈⠻⣷⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+            ⠀⠀⠀⠀⠀⠀⠘⡿⠿⠿⣷⣄⡀⠀⣿⣤⡾⣫⣶⡿⠿⠿⠟⠛⠉⠉⠀⠙⢿⣧⡙⣷⡀⢀⣿⡇⠀⣀⣤⣶⣶⣶⣶⠀⠀⠀⠀⠀⠀
+            ⠀⠀⠀⠀⠀⠀⠀⡿⠿⣿⣶⣍⠳⣄⢻⣿⢞⡵⠀⠀⠀⢠⠀⠀⣤⠀⠀⣀⠀⠙⢷⣜⣿⣛⡽⣡⡾⣟⣋⣭⣭⣿⠃⠀⠀⠀⠀⠀⠀
+            ⢠⣴⡤⡄⠀⠀⠀⡇⠀⠀⠈⠙⢧⠙⣿⣷⠏⠀⠀⠀⢠⣫⣓⡦⣤⣴⣺⢞⡇⠀⠀⠉⢻⣿⣱⣿⠾⠛⠉⠈⢩⡏⠀⠀⠀⢀⡀⣀⠀
+            ⠸⢯⣿⠿⢷⣄⠀⢿⠀⠀⠀⠀⠘⣧⠸⣿⠀⠀⠀⢀⠀⠙⠛⠿⠽⠟⠓⣉⣠⣄⣀⠀⢸⣿⠿⠋⠀⠀⠀⠀⣾⠀⢀⠴⠚⣯⡟⡿⠀
+            ⠀⠸⣿⡀⣷⡹⣇⠸⣧⡀⠀⠀⠀⠘⠂⣿⠀⠒⠉⣩⡛⠳⣶⠀⠀⢰⣾⣋⣩⣄⣉⡅⢻⣿⠀⠀⠀⠀⢀⣼⠇⣰⠉⠀⠀⣿⣧⣷⡆
+            ⠀⠀⠈⠳⣝⢧⢻⠀⢹⡇⠀⠀⠀⠀⢀⣿⠀⠈⢿⣻⢿⣿⡆⠀⠀⠀⠸⣿⣿⡿⠋⠀⢸⣿⠀⠀⠀⠰⣿⠋⠀⣯⠀⢀⡼⠟⣩⡟⠀
+            ⠀⠀⠀⣀⡈⢯⢹⠀⠘⣿⡀⠀⠀⠀⢸⣿⠀⠀⠀⠀⠉⠀⠀⠀⣀⡀⠀⠀⠀⠀⠀⠀⢸⡿⠀⠀⠀⠀⣿⠀⠀⣿⠞⠛⠛⠛⠉⠀⠀
+            ⠀⠀⢰⣏⠙⠿⣿⣦⡀⢻⣧⠀⠀⠀⣸⣿⣇⠀⠀⠀⠀⠀⠀⠀⠛⠃⠀⠀⠀⠀⠀⢀⣿⠃⠀⠀⠀⢰⣿⠀⣀⣽⠶⢾⣷⣀⠀⠀⠀
+            ⠀⢠⡿⠻⣷⡤⠀⠉⠻⣦⡟⠷⣤⣶⠏⢘⣿⣆⠀⠀⠀⠀⠀⠀⣿⡆⠀⠀⠀⠀⢠⡿⠛⣧⡀⢀⣴⣿⣿⡾⠋⢀⣠⡞⠋⢻⣷⡀⠀
+            ⠀⣿⠀⠀⢿⣇⠀⠀⠀⢸⣷⡶⠛⢁⣴⠟⠙⡿⣿⣦⠀⠀⠀⠀⣿⡇⠀⠀⠀⢠⢿⣶⢶⣿⠛⢿⣿⠋⢽⡇⠀⠀⠙⣿⠀⠀⣿⡇⠀
+            ⠀⢿⣧⣠⡴⢿⣅⠀⠀⣸⡟⠀⠀⣾⡇⠀⠀⣿⣷⢿⣧⠀⠀⠀⠸⣧⡀⠀⠀⣿⡜⢿⣦⣙⣷⡄⢻⣷⠘⡇⠀⠀⠴⠏⠀⢠⡿⠀⠀
+            ⠀⠘⣿⠏⠀⠀⠹⣷⣜⠋⡀⠀⠀⣿⣧⣀⠀⠀⠀⠈⣿⡆⠀⠀⠀⢻⣧⠀⠀⠹⣿⣤⣀⣉⣁⣀⣬⡿⠷⢶⣶⣤⣀⢀⡴⢿⣿⡆⠀
+            ⠀⢰⡟⠀⠀⠀⢀⣿⣿⢿⣧⠀⢀⣼⠟⠁⠀⠀⠀⠀⠸⣿⡀⠀⠀⠀⠙⢷⣄⡀⠈⠛⠛⠛⢛⣉⣤⠤⠀⢀⠀⠙⣿⣧⣀⣼⠟⠀⠀
+            ⠀⢸⣇⢠⡴⠚⢛⣽⡇⠸⣿⠀⣼⠁⠀⠀⠀⠀⠀⠀⠀⠹⣿⣄⠀⠀⠀⠀⠈⠙⠓⠒⠒⠛⠉⠁⢀⣴⠟⠛⢷⣆⠈⣿⠉⠀⠀⠀⠀
+            ⠀⠘⣿⡏⠀⣴⠟⠋⠁⢀⣿⢸⡇⠀⠀⠀⠀⠀⠀⠀⠀⣰⠏⣿⣷⣤⣀⠀⠀⠀⠀⠀⠀⣀⣤⡴⣿⣿⣄⠀⠘⢋⣼⣧⣄⠀⠀⠀⠀
+            ⠀⠀⢹⡇⢸⠿⠂⠀⠀⣸⡟⢸⡇⠀⠀⠀⠀⠀⠀⣠⠞⠁⣴⠃⠈⠙⠛⠿⠿⠶⠾⠟⠛⠉⠁⢸⣿⡈⣛⣿⡟⠋⠉⠉⠛⣧⣀⣀⡀
+            ⠀⠀⢘⣿⣦⣀⡀⣀⡴⣿⣷⣌⣿⣦⣄⣀⣤⠴⠛⠁⣠⡞⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡿⢹⣿⠛⠛⠛⠻⠟⠛⠋⢁⡼⠃
+            ⠀⢠⡿⠋⠙⠛⠛⠉⠀⠀⠙⠿⣿⣿⣭⣉⣀⣠⣴⠞⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣰⡟⠁⠘⢿⣦⡀⠀⠀⠀⠀⣰⠟⠁⠀
+            ⠀⣾⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠛⢿⣭⡉⠉⠀⠀⠀⠀⠀⠀⣴⠆⠀⠀⠀⠀⠀⢀⣤⣾⡏⠀⠀⠀⠀⠙⠻⢶⣶⣶⠛⠁⠀⠀⠀
+            ⠀⣿⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠿⣷⣤⣀⠀⠀⠀⠀⠀⠀⢀⣀⣠⡴⢞⣫⡾⠋⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⠀⠀⠀⠀⠀
+            ⠀⠸⣿⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣙⠻⢿⣿⣿⣭⣭⣭⣭⡷⠾⣟⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣿⡟⠀⠀⠀⠀⠀
+            ⠀⠀⠻⣿⣦⡀⠀⣀⠀⠀⠀⠀⠀⠀⢀⣀⢾⣎⠽⠚⢉⣠⡤⠬⠿⠿⣿⣿⣦⣛⣤⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⡿⠁⠀⠀⠀⠀⠀
+            ⠀⠀⠀⠈⠛⠻⣶⣭⣓⣶⣴⢰⣖⣻⣮⠽⠛⢁⣤⠶⠋⠁⠀⠀⣤⣀⣸⡏⠙⢿⣵⠶⣀⡀⠀⠀⠀⣀⡴⣤⡾⠋⠀⠀⠀⠀⠀⠀⠀
+            ⠀⠀⠀⠀⠀⠀⠹⣯⣛⠛⠛⠛⠛⢉⣡⣤⣾⡟⠁⠀⠀⠀⠀⢀⣿⠛⢿⣿⣦⣀⠙⠳⣯⣑⣓⣾⣞⣯⣿⡿⢤⡴⠒⢢⣄⠀⠀⠀⠀
+            ⠀⠀⠀⠀⠀⠀⠀⠈⠙⠛⠿⠿⠛⠛⠉⠁⠙⢿⣶⣤⣄⣠⣴⣾⣏⣀⣀⣹⠟⠻⠿⠷⠶⠶⠟⠋⢉⣴⣏⢽⣾⢶⠂⠂⢸⣄⡤⣤⡀
+            ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⠛⠛⠋⠉⠛⠛⠛⠁⠀⠀⠀⠀⠀⠀⠀⠀⠈⠛⠉⠉⠉⠋⠙⢛⣁⣀⣀⠼⠇
+            ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠒⠒⠚⠋⠀⠀⠀⠀⠀
+            `;
+            element.innerHTML = ganeshaArt;
+            element.style.fontSize = '5px';
+            
+            element.style.lineHeight = "0.9";  // remove extra spacing
+            element.style.overflow = "auto"; // allow scroll if too big
+
+            element.style.display = 'flex';
+            element.style.alignItems = 'center';
+            element.style.justifyContent = 'center';
+        }
     }
 
     element.id = elementId;
@@ -413,6 +459,72 @@ function exportDesign() {
     });
 }
 
+function printDesign() {
+    const canvas = document.getElementById('envelopeCanvas');
+
+    // Hide selection borders temporarily
+    const selected = canvas.querySelector('.selected');
+    if (selected) selected.classList.remove('selected');
+
+    html2canvas(canvas, {
+        backgroundColor: '#ffffff',
+        scale: 2,
+        logging: false,
+        useCORS: true
+    }).then(canvasElement => {
+        if (selected) selected.classList.add('selected');
+
+        const dataUrl = canvasElement.toDataURL();
+
+        // Create hidden iframe
+        const iframe = document.createElement('iframe');
+        iframe.style.position = 'absolute';
+        iframe.style.width = '0';
+        iframe.style.height = '0';
+        iframe.style.border = '0';
+        document.body.appendChild(iframe);
+
+        const doc = iframe.contentWindow.document;
+        doc.open();
+        doc.write(`
+            <html>
+            <head>
+                <title>Print Envelope</title>
+                <style>
+                    body {
+                        margin: 0;
+                        display: flex;
+                        justify-content: center;
+                        align-items: flex-start;
+                        height: 100vh;
+                    }
+                    img {
+                        margin-top: 20px;
+                        max-width: 100%;
+                        height: auto;
+                    }
+                </style>
+            </head>
+            <body>
+                <img src="${dataUrl}" />
+            </body>
+            </html>
+        `);
+        doc.close();
+
+        // Print the iframe content
+        iframe.contentWindow.focus();
+        iframe.contentWindow.print();
+
+        // Remove iframe after printing
+        setTimeout(() => {
+            document.body.removeChild(iframe);
+        }, 1000);
+    });
+}
+
+
+
 // Keyboard shortcuts
 document.addEventListener('keydown', function(e) {
     if (e.key === 'Delete' && selectedElement) {
@@ -435,12 +547,30 @@ document.getElementById("give-feedback").addEventListener("click", function (eve
   
   event.preventDefault();
 
-  let link = "https://forms.gle/EkcfLnTTXUfxAP1q7"; // Your link here
+  let link = "https://forms.gle/EkcfLnTTXUfxAP1q7";
   document.getElementById("linkFrame").src = link;
 
   // Show the modal (Bootstrap 5)
   let myModal = new bootstrap.Modal(document.getElementById("linkModal"));
   myModal.show();
 });
+
+function showfeedbackModal() {
+    const helpModal = new bootstrap.Modal(document.getElementById('linkModal'));
+    
+    let link = "https://forms.gle/EkcfLnTTXUfxAP1q7";
+    document.getElementById("linkFrame").src = link;
+    helpModal.show();
+}
+
+function showHelpModal() {
+    const helpModal = new bootstrap.Modal(document.getElementById('helpModal'));
+    
+    let link = 'https://youtube.com/embed/58VpB21BP7s?si=KjCcGUWPD8WXUpKI'
+    document.getElementById("helpFrame").src = link;
+    helpModal.show();
+}
+
+
 
 
