@@ -16,14 +16,30 @@
     </div>
 
     <div class="modal fade" id="linkModal" tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog modal-xl">
+      <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title">Submit Feedback</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            <button type="button" class="btn-close modal-btn-close" data-bs-dismiss="modal"></button>
           </div>
           <div class="modal-body p-0">
+            <h6 class="modal-title p-3"><b>Disclaimer:</b> We do not save your email ids, name is required to get yourself featured for valuable feature addition.</h6>
             <iframe id="linkFrame" style="width:100%;height:80vh;border:0;"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="helpModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Help Section: How to video for creating on own envelope from below</h5>
+            <button type="button" class="btn-close modal-btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body p-0">
+            <h6 class="modal-title p-3"><b>Video Credit: @inclArt</b> Follow the instructions to make your own envelope after saving them from our website.</h6>
+            <iframe id="helpFrame" style="width:100%;height:80vh;border:0;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
           </div>
         </div>
       </div>
@@ -35,11 +51,9 @@
             <div class="col-lg-3 col-md-3">
                 <div class="design-panel p-3">
                     <div class="menu-header">
-                        <img src="logo_bw.png" alt="Logo" style="max-width: 100%; height: auto; margin-right: 8px;">
-                        <!-- <h4><i class="fas fa-palette me-2"></i>Lifafa Designer. </h4> -->
-                        <!-- <h4>Lifafa Designer. </h4>
-                        <p class="mb-0 small">Drag & Drop to Create</p> -->
-                        <p class="mt-2 mb-0 small"><a href="https://forms.gle/EkcfLnTTXUfxAP1q7" id="give-feedback">Click here to give feedback</a></p>
+                        <!-- <img src="logo_bw.png" alt="Logo" style="max-width: 100%; height: auto; margin-right: 8px;"> -->
+                        <h3><i class="fas fa-envelope me-2"></i>Lifafa Designer</h3>
+                        <!-- <p class="mt-2 mb-0 small"><a href="https://forms.gle/EkcfLnTTXUfxAP1q7" id="give-feedback">Click here to give feedback</a></p> -->
                         <p class="mt-1 mb-0 small"><i class="fas fa-envelope"></i> us on design@meralifafa.in</p>
                     </div>
 
@@ -89,6 +103,9 @@
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="scroll-container">
+                        <div class="design-item pattern-item" data-type="pattern" data-pattern="ganesha">
+                            <i class="fas fa-om emoji-om me-2"></i>Shri Ganesha
+                        </div>
                         <div class="design-item pattern-item" data-type="pattern" data-pattern="floral">
                             <i class="fas fa-leaf me-2"></i>Floral Pattern
                         </div>
@@ -99,13 +116,12 @@
                             <i class="fas fa-compass me-2"></i>Compass Star
                         </div>
                         <div class="design-item pattern-item" data-type="pattern" data-pattern="snowflake">
-                            <!-- <i class="fas fa-layer-group me-2"></i>Snowflake -->
                             <i class="fa-solid fa-snowflake me-2"></i>Snowflake
                         </div>
                     </div>
 
                     <!-- Colors -->
-                    <div class="submenu-header">
+                    <!-- <div class="submenu-header">
                         <span><i class="fas fa-palette me-2"></i>Colors</span>
                         <i class="fas fa-chevron-down"></i>
                     </div>
@@ -118,7 +134,7 @@
                         <div class="color-picker" style="background: #dda0dd" data-color="#dda0dd"></div>
                         <div class="color-picker" style="background: #98d8c8" data-color="#98d8c8"></div>
                         <div class="color-picker" style="background: #f7dc6f" data-color="#f7dc6f"></div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
 
@@ -140,14 +156,24 @@
                             <button class="btn btn-sm export-btn me-1" onclick="exportDesign()">
                                 <i class="fas fa-download me-2"></i>Export
                             </button>
-                            <button class="btn btn-sm export-btn me-1" onclick="exportDesign2()">
+                            <button class="btn btn-sm export-btn me-1" onclick="printDesign()">
                                 <i class="fas fa-print me-2"></i>Print
                             </button>
                         </div>
                     </div>
                     <div class="row">
-                        <p class="mb-0 small">Drag & Drop to Create.</p>
-                        <p class="mt-0 mb-0 small">Tap and Click on object to remove.</p>
+                        <div class="col-lg-5 col-md-5">
+                            <p class="mb-0 small">Drag & Drop to Create.</p>
+                            <p class="mt-0 mb-0 small">Tap and Click on object to remove.</p>
+                        </div>
+                        <div class="col-lg-7 col-md-7 ms-0x">
+                            <button class="btn btn-sm export-btn me-1" onclick="showHelpModal()">
+                                <i class="fas fa-question-circle me-2"></i>Help
+                            </button>
+                            <button class="btn btn-sm export-btn me-1" onclick="showfeedbackModal()">
+                                <i class="fas fa-comment-alt me-2"></i>Feedback
+                            </button>
+                        </div>
                     </div>
                     <!-- <div class="">
                         <h3><i class="fas fa-envelope me-2"></i>Design Canvas</h3>

@@ -141,6 +141,38 @@
     box-shadow: 0 0 6px #39ff14;
 }
 
+[data-theme="dark"] .modal-content {
+    background-color: rgba(0, 0, 0, 0.9);
+    color: #39ff14;
+}
+
+[data-theme="dark"] .modal-btn-close {
+    filter: invert(70%) sepia(100%) saturate(500%) hue-rotate(80deg);
+}
+
+[data-theme="dark"] .emoji-om {
+    color: #39ff14;
+}
+
+.emoji-om {
+    color: #000000;
+}
+
+[data-theme="dark"] a {
+    color: #39ff14;
+    /* text-decoration: none; */
+}
+
+.ms-0x {
+    padding-top: 5px;
+    margin-left: -22.5px;
+}
+
+a {
+    color: white;
+    /* text-decoration: none; */
+}
+
 #customMenu {
   display: none;
   position: absolute;
