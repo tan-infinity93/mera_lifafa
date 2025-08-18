@@ -1,3 +1,20 @@
+
+window.onload = function() {
+    const myModal = document.getElementById('welcomeModal');
+    const bootstrapModal = new bootstrap.Modal(myModal);
+    bootstrapModal.show();
+};
+
+function closeModal() {
+    const myModal = document.getElementById('welcomeModalBtn');
+    // myModal.style.display = 'none';
+    myModal.click();
+}
+
+// Call closeModal after 5 seconds (5000 milliseconds)
+setTimeout(closeModal, 5000);
+
+
 let selectedElement = null;
 let elementCounter = 0;
 let isDragging = false;
