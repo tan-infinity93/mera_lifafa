@@ -14,6 +14,33 @@ function closeModal() {
 // Call closeModal after 5 seconds (5000 milliseconds)
 setTimeout(closeModal, 5000);
 
+document.addEventListener("DOMContentLoaded", function () {
+// Track clicks on draggable elements
+document.querySelectorAll(".design-item").forEach(function (item) {
+  item.addEventListener("click", function () {
+    let type = item.getAttribute("data-type") || "unknown";
+    let label = item.innerText.trim();
+    gtag("event", "design_item_click", {
+      event_category: "engagement",
+      event_label: label,
+      item_type: type
+    });
+  });
+});
+
+// Track clicks on all buttons
+document.querySelectorAll("button").forEach(function (btn) {
+  btn.addEventListener("click", function () {
+    let label = btn.innerText.trim() || btn.id || "unnamed_button";
+    gtag("event", "button_click", {
+      event_category: "engagement",
+      event_label: label
+    });
+  });
+});
+});
+
+
 
 let selectedElement = null;
 let elementCounter = 0;
