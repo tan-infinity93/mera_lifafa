@@ -9,6 +9,15 @@
     <!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
     <link rel="stylesheet" type="text/css" href="style_v2.css">
 </head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-W3LYQBD5MV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-W3LYQBD5MV');
+</script>
 <body>
     <!-- Context Menu -->
     <div id="customMenu">
@@ -45,15 +54,28 @@
       </div>
     </div>
 
+    <div class="modal fade" id="welcomeModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title">Hello User, Welcome to Meralifafa.in</h2>
+            <button type="button" class="btn-close modal-btn-close" data-bs-dismiss="modal" id="welcomeModalBtn"></button>
+          </div>
+          <div class="modal-body p-0">
+            <h4 class="modal-title p-3">Unleash your creativity and design your own envelope, your very own lifafa.</h4>
+            <h4 class="modal-title p-3"><b>Note:</b> We use google analytics to track our website usage.</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="container-fluid py-3">
         <div class="row">
             <!-- Left Panel - Design Menu -->
             <div class="col-lg-3 col-md-3">
                 <div class="design-panel p-3">
                     <div class="menu-header">
-                        <!-- <img src="logo_bw.png" alt="Logo" style="max-width: 100%; height: auto; margin-right: 8px;"> -->
                         <h3><i class="fas fa-envelope me-2"></i>Lifafa Designer</h3>
-                        <!-- <p class="mt-2 mb-0 small"><a href="https://forms.gle/EkcfLnTTXUfxAP1q7" id="give-feedback">Click here to give feedback</a></p> -->
                         <p class="mt-1 mb-0 small"><i class="fas fa-envelope"></i> us on design@meralifafa.in</p>
                     </div>
 
