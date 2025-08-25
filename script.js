@@ -267,9 +267,12 @@ function createElement(sourceElement, x, y) {
             element.style.justifyContent = 'center';
         } 
         else if (pattern === 'sunflower') {
+            element.style.background = 'transparent';
             element.style.backgroundImage = "url('/images/ganesha_art/noun-sunflower-7988813.svg')";
             element.style.backgroundSize = "cover";
             element.style.backgroundPosition = "center";
+            // element.style.color = 'black';
+            // element.style.filter = "invert(0%) sepia(100%) saturate(5000%) hue-rotate(0deg)";
         }
         else if (pattern === 'lotus') {
             element.style.backgroundImage = "url('/images/ganesha_art/noun-lotus-4374508.svg')";
