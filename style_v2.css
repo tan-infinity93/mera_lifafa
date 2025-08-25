@@ -197,6 +197,22 @@ a {
   background: #eee;
 }
 
+.fa-modak, .fa-conch, .fa-ganesha {
+    /* height: 30px;
+    width: 50px;
+    color: #000000; */
+    width: 2em;
+    height: 2em;
+    /* vertical-align: -0.125em; */
+    fill: #000000 !important;
+    margin-left: -5px;
+    margin-top: -5px;
+    margin-bottom: -5px;
+    /* padding-top: -5px;
+    padding-bottom: -5px; */
+    /* color: #000000 !important; */
+}
+
 /* :root {
     --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
@@ -267,7 +283,8 @@ body {
     position: absolute;
     cursor: move;
     user-select: none;
-    border: 2px solid transparent;
+    /* border: 2px solid transparent; */
+    border: 0.5px solid transparent;
     transition: all 0.2s ease;
 }
 
@@ -276,10 +293,10 @@ body {
     transform: scale(1.02);
 }
 
-.envelope-element.selected {
+/* .envelope-element.selected {
     border-color: #f5576c;
     box-shadow: 0 0 15px rgba(245, 87, 108, 0.4);
-}
+} */
 
 .design-item {
     cursor: grab;
@@ -365,6 +382,35 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+.nav-pills .nav-link {
+    background: var(--secondary-gradient); /* same gradient */
+    color: white;
+    padding: 12px 15px;
+    /* margin: 5px; */
+    border-radius: 5px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.nav-pills .nav-link.activex,
+.nav-pills .nav-link:hover {
+    background: var(--primary-gradient); /* highlight effect */
+    color: #fff;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.25);
+}
+
+.nav-link.active {
+    background: var(--primary-gradient); /* highlight effect */
+    color: #fff;
+    /* box-shadow: 0 3px 8px rgba(0,0,0,0.25); */
+    /* border-color: var(--bs-primary); */
+    border-color: #7fb3d3;
+    border: 1px solid;
 }
 
 .submenu-header-1 {
@@ -563,3 +609,23 @@ body {
     background: var(--primary-gradient);
     border-radius: 10px;
 }
+
+.icon-ganpati {
+  display: inline-block;
+  width: 1.25em;
+  height: 1.25em;
+  vertical-align: -0.15em;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' version='1.1' viewBox='-5 -10 110 135'%3E%3Cpath d='m50 47.621c0.003906 0.003906-0.019531 0.14844 0 0.14062 0.019531 0.003906-0.003906-0.13672 0-0.14062z'/%3E%3Cpath d='m49.844 50.41-0.011719 0.26562v0.015625c0.003907 0.09375 0.085938 0.16797 0.17969 0.16406 0.22266-0.007813 0.14844-0.30469 0.14844-0.44531-0.007812-0.19531-0.3125-0.19531-0.31641 0z'/%3E ... %3C/svg%3E%0A");
+}
+
+
+
+
+
+
+
+
+

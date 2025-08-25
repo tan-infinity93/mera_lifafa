@@ -2,7 +2,7 @@
 window.onload = function() {
     const myModal = document.getElementById('welcomeModal');
     const bootstrapModal = new bootstrap.Modal(myModal);
-    bootstrapModal.show();
+    // bootstrapModal.show();
 };
 
 function closeModal() {
@@ -247,6 +247,62 @@ function createElement(sourceElement, x, y) {
             element.style.lineHeight = "0.9";  // remove extra spacing
             element.style.overflow = "auto"; // allow scroll if too big
 
+            element.style.display = 'flex';
+            element.style.alignItems = 'center';
+            element.style.justifyContent = 'center';
+        }
+    }
+    else if (type === 'floral-pattern') {
+        element = document.createElement('div');
+        element.className = 'envelope-element pattern-element';
+        element.style.width = '100px';
+        element.style.height = '100px';
+
+        const pattern = sourceElement.dataset.pattern;
+        if (pattern === 'floral') {
+            element.innerHTML = '🌸';
+            element.style.fontSize = '100px';
+            element.style.display = 'flex';
+            element.style.alignItems = 'center';
+            element.style.justifyContent = 'center';
+        } 
+        else if (pattern === 'sunflower') {
+            element.style.backgroundImage = "url('/images/ganesha_art/noun-sunflower-7988813.svg')";
+            element.style.backgroundSize = "cover";
+            element.style.backgroundPosition = "center";
+        }
+        else if (pattern === 'lotus') {
+            element.style.backgroundImage = "url('/images/ganesha_art/noun-lotus-4374508.svg')";
+            element.style.backgroundSize = "cover";
+            element.style.backgroundPosition = "center";
+        }
+    }
+    else if (type === 'ganesha-art') {
+        element = document.createElement('div');
+        element.className = 'envelope-element pattern-element';
+        element.style.width = '100px';
+        element.style.height = '100px';
+
+        const pattern = sourceElement.dataset.pattern;
+        console.log('line 257');
+        if (pattern == 'ganesha-mukha') {
+            element.style.backgroundImage = "url('/images/ganesha_art/noun-ganesh-7298203.svg')";
+            element.style.backgroundSize = "cover";
+            element.style.backgroundPosition = "center";
+        }
+        else if (pattern == 'ganesha-mukha2') {
+            element.style.backgroundImage = "url('/images/ganesha_art/noun-ganesha-111504.svg')";
+            element.style.backgroundSize = "cover";
+            element.style.backgroundPosition = "center";
+        }
+        else if (pattern == 'ganesha-modak') {
+            element.style.backgroundImage = "url('/images/ganesha_art/noun-modak-4932207.svg')";
+            element.style.backgroundSize = "cover";
+            element.style.backgroundPosition = "center";
+        }
+        else if (pattern == 'spiral-shell') {
+            element.innerHTML = '🐚';
+            element.style.fontSize = '200px';
             element.style.display = 'flex';
             element.style.alignItems = 'center';
             element.style.justifyContent = 'center';
