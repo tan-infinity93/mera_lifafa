@@ -136,11 +136,31 @@
             transition: left 0.5s;
         }
 
+        .btn-custom2::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
         .btn-custom:hover::before {
             left: 100%;
         }
 
+        .btn-custom2:hover::before {
+            left: 100%;
+        }
+
         .btn-custom:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        .btn-custom2:hover {
             transform: translateY(-3px);
             box-shadow: 0 10px 25px rgba(0,0,0,0.3);
         }
@@ -624,7 +644,7 @@
                     </p>
                     <!-- <button class="btn btn-custom me-3 mb-3">Start Designing</button>
                     <button class="btn btn-custom me-3 mb-3">View Portfolio</button> -->
-                    <a href="envelope_designer.html" class="btn btn-custom me-3 mb-3">Start Designing</a>
+                    <a href="designer.html" class="btn btn-custom me-3 mb-3">Start Designing</a>
                     <a href="#portfolio" class="btn btn-custom2 me-3 mb-3">View Portfolio</a>
                     <!-- <button class="btn btn-outline-light btn-lg mb-3">View Portfolio</button> -->
                 </div>
@@ -644,7 +664,7 @@
     <!-- Features Section -->
     <section id="features" class="py-5x">
         <div class="container">
-            <h2 class="section-title fade-in">Why Choose EnvelopeCraft?</h2>
+            <h2 class="section-title fade-in">Why Choose Meralifafa?</h2>
             <div class="row">
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="feature-card fade-in">
@@ -765,7 +785,7 @@
                     <h2 class="display-4 fw-bold mb-4">Ready to Create Something Amazing?</h2>
                     <p class="lead mb-4">Let's bring your envelope design vision to life. Start your custom design journey today!</p>
                     <!-- <button class="btn btn-custom btn-lg me-3">Get Started Now</button> -->
-                    <a href="envelope_designer.html" class="btn btn-custom2 me-3 mb-3">Get Started Now</a>
+                    <a href="designer.html" class="btn btn-custom2 me-3 mb-3">Get Started Now</a>
                     <!-- <button class="btn btn-outline-light btn-lg">Contact Us</button> -->
                 </div>
             </div>
