@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meralifafa - Banaye apna lifafa</title>
+    <meta name="description" content="Welcome to meralifafa.in where your imagination blurs the boundary to convey your messages to your loved ones in a time tested format curated with emotions">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #6366f1;
+            --secondary-color: #ec4899;
+            --accent-color: #f59e0b;
+            --dark-color: #1f2937;
+            --light-color: #f8fafc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        #heroSubtitle {
+            min-height: 140px; /* keeps text area stable */
+        }
+
+        #heroSubtitle span {
+            display: block;
+            line-height: 1.6;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        }
+
+        .hero-section {
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .floating-envelope {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+            font-size: 3rem;
+            color: white;
+        }
+
+        .floating-envelope:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+        .floating-envelope:nth-child(2) { top: 20%; right: 15%; animation-delay: 1s; }
+        .floating-envelope:nth-child(3) { bottom: 30%; left: 20%; animation-delay: 2s; }
+        .floating-envelope:nth-child(4) { bottom: 20%; right: 10%; animation-delay: 3s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            animation: slideInUp 1s ease-out;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: bold;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: titleGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            from { text-shadow: 2px 2px 4px rgba(0,0,0,0.3), 0 0 20px rgba(255,255,255,0.2); }
+            to { text-shadow: 2px 2px 4px rgba(0,0,0,0.3), 0 0 30px rgba(255,255,255,0.4); }
+        }
+
+        .btn-custom {
+            background: linear-gradient(45deg, var(--accent-color), #f97316);
+            border: none;
+            padding: 10px 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 50px;
+            color: white;
+            /* text-transform: uppercase; */
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-custom2 {
+            /* background: linear-gradient(45deg, var(--accent-color), #f97316); */
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border: none;
+            padding: 10px 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 50px;
+            color: white;
+            /* text-transform: uppercase; */
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-custom::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-custom2::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-custom:hover::before {
+            left: 100%;
+        }
+
+        .btn-custom2:hover::before {
+            left: 100%;
+        }
+
+        .btn-custom:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        .btn-custom2:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        #features {
+            padding-top: 6em;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid #e5e7eb;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: iconPulse 2s infinite;
+        }
+
+        @keyframes iconPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border-radius: 2px;
+        }
+
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .portfolio-item:hover {
+            transform: scale(1.05);
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(99, 102, 241, 0.9), rgba(236, 72, 153, 0.9));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+
+        .stats-section {
+            background: var(--dark-color);
+            color: white;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            display: block;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            color: white;
+            text-align: center;
+            padding: 5rem 0;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        .navbar {
+            transition: all 0.3s ease;
+            background: transparent !important;
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.95) !important;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .navbar.scrolled .navbar-brand,
+        .navbar.scrolled .nav-link {
+            color: var(--dark-color) !important;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Footer Styles */
+        .footer-section {
+            background: linear-gradient(135deg, var(--dark-color) 0%, #111827 50%, var(--dark-color) 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="envelope-pattern" patternUnits="userSpaceOnUse" width="100" height="100"><path d="M20 20 L50 50 L80 20 Z" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23envelope-pattern)"/></svg>');
+            opacity: 0.5;
+        }
+
+        .footer-brand {
+            position: relative;
+        }
+
+        .footer-icon {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: iconGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes iconGlow {
+            from { filter: drop-shadow(0 0 5px rgba(99, 102, 241, 0.5)); }
+            to { filter: drop-shadow(0 0 15px rgba(236, 72, 153, 0.7)); }
+        }
+
+        .footer-title {
+            font-weight: bold;
+            color: white;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 30px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border-radius: 2px;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-links a::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: -15px;
+            transform: translateY(-50%);
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            transition: width 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+            transform: translateX(10px);
+        }
+
+        .footer-links a:hover::before {
+            width: 10px;
+        }
+
+        .contact-item {
+            color: #cbd5e1;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .contact-item:hover {
+            color: var(--accent-color);
+        }
+
+        .contact-item i {
+            color: var(--primary-color);
+            width: 20px;
+        }
+
+        .newsletter-input {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            border-radius: 25px 0 0 25px;
+            padding: 12px 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .newsletter-input::placeholder {
+            color: #cbd5e1;
+        }
+
+        .newsletter-input:focus {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+            color: white;
+        }
+
+        .newsletter-btn {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            border-radius: 0 25px 25px 0;
+            color: white;
+            padding: 12px 20px;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-btn:hover {
+            transform: translateX(3px);
+            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.4);
+        }
+
+        .social-links-footer {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-link {
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            text-decoration: none;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .social-link:hover {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            color: white;
+        }
+
+        .footer-divider {
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            margin: 30px 0 20px 0;
+        }
+
+        .copyright {
+            color: #94a3b8;
+        }
+
+        .footer-legal {
+            display: flex;
+            justify-content: flex-end;
+            gap: 20px;
+        }
+
+        .footer-legal a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .footer-legal a:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(45deg, rgba(99, 102, 241, 0.1), rgba(236, 72, 153, 0.1));
+            animation: floatShape 15s infinite ease-in-out;
+        }
+
+        .shape-1 {
+            width: 200px;
+            height: 200px;
+            top: -100px;
+            right: -50px;
+            animation-delay: 0s;
+        }
+
+        .shape-2 {
+            width: 150px;
+            height: 150px;
+            bottom: -75px;
+            left: 10%;
+            animation-delay: 5s;
+        }
+
+        .shape-3 {
+            width: 100px;
+            height: 100px;
+            top: 50%;
+            right: 20%;
+            animation-delay: 10s;
+        }
+
+        #bottom-footer-row {
+            padding-bottom: 30px;
+        }
+
+        #portfolio {
+            padding-top: 6em;
+        }
+
+        @keyframes floatShape {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-20px) rotate(120deg); }
+            66% { transform: translateY(10px) rotate(240deg); }
+        }
+
+        @media (max-width: 768px) {
+            .footer-legal {
+                justify-content: center;
+                margin-top: 20px;
+            }
+            
+            .social-links-footer {
+                justify-content: center;
+            }
+            
+            .footer-legal a {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+    <!-- GSAP CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-W3LYQBD5MV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-W3LYQBD5MV');
+</script>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold fs-3" href="#"><i class="fas fa-envelope me-2"></i>Meralifafa</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section gradient-bg d-flex align-items-center">
+        <div class="floating-envelope"><i class="fas fa-envelope"></i></div>
+        <div class="floating-envelope"><i class="fas fa-envelope-open"></i></div>
+        <div class="floating-envelope"><i class="fas fa-mail-bulk"></i></div>
+        <div class="floating-envelope"><i class="fas fa-paper-plane"></i></div>
+        
+        <div class="container hero-content">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1 class="hero-title mb-4">Custom Envelope Design</h1>
+                    <!-- <p class="lead text-light mb-4 fs-4">Transform ordinary mail into extraordinary experiences with our bespoke envelope designs. Every piece tells your unique story.</p> -->
+                    <p class="lead text-light mb-4 fs-4" id="heroSubtitle">
+                      <span class="en-text">Transform ordinary mail into extraordinary experiences with our bespoke envelope designs. Every piece tells your unique story.</span>
+                      <span class="hi-text d-none">साधारण चिट्ठी को बनाइए असाधारण अनुभव,<br>
+                      हमारे अनूठे लिफ़ाफ़ों की डिज़ाइन से।<br>
+                      हर एक टुकड़ा कहेगा,<br>
+                      आपकी अपनी अनोखी दास्ताँ।</span>
+                    </p>
+                    <!-- <button class="btn btn-custom me-3 mb-3">Start Designing</button>
+                    <button class="btn btn-custom me-3 mb-3">View Portfolio</button> -->
+                    <a href="designer.html" class="btn btn-custom me-3 mb-3">Start Designing</a>
+                    <a href="#portfolio" class="btn btn-custom2 me-3 mb-3">View Portfolio</a>
+                    <!-- <button class="btn btn-outline-light btn-lg mb-3">View Portfolio</button> -->
+                </div>
+                <div class="col-lg-6">
+                    <div class="text-center">
+                        <i class="fas fa-envelope-open-text text-light" style="font-size: 15rem; opacity: 0.8;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down fa-2x"></i>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-5x">
+        <div class="container">
+            <h2 class="section-title fade-in">Why Choose Meralifafa?</h2>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="feature-card fade-in">
+                        <i class="fas fa-palette feature-icon mb-3"></i>
+                        <h4 class="mb-3">Custom Designs</h4>
+                        <p>Create unique envelopes that perfectly match your brand, event, or personal style with unlimited customization options.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="feature-card fade-in">
+                        <i class="fas fa-rocket feature-icon mb-3"></i>
+                        <h4 class="mb-3">Fast Delivery</h4>
+                        <p>Get your custom envelopes delivered quickly without compromising on quality. Rush orders available for urgent needs.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="feature-card fade-in">
+                        <i class="fas fa-award feature-icon mb-3"></i>
+                        <h4 class="mb-3">Premium Quality</h4>
+                        <p>We use only the finest materials and printing techniques to ensure your envelopes make a lasting impression.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="feature-card fade-in">
+                        <i class="fas fa-users feature-icon mb-3"></i>
+                        <h4 class="mb-3">Expert Team</h4>
+                        <p>Our experienced designers work closely with you to bring your vision to life with professional expertise.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="feature-card fade-in">
+                        <i class="fas fa-dollar-sign feature-icon mb-3"></i>
+                        <h4 class="mb-3">Affordable Pricing</h4>
+                        <p>Competitive pricing for all order sizes, from small personal projects to large corporate campaigns.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="feature-card fade-in">
+                        <i class="fas fa-recycle feature-icon mb-3"></i>
+                        <h4 class="mb-3">Eco-Friendly</h4>
+                        <p>Sustainable printing practices and recyclable materials to minimize environmental impact.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-item fade-in">
+                        <span class="stat-number" data-count="10000">0</span>
+                        <span>Happy Customers</span>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-item fade-in">
+                        <span class="stat-number" data-count="50000">0</span>
+                        <span>Envelopes Designed</span>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-item fade-in">
+                        <span class="stat-number" data-count="99">0</span>
+                        <span>% Satisfaction Rate</span>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="stat-item fade-in">
+                        <span class="stat-number" data-count="5">0</span>
+                        <span>Years of Experience</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-5x pt-6c bg-light">
+        <div class="container">
+            <h2 class="section-title fade-in">Our Portfolio</h2>
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="portfolio-item fade-in">
+                        <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&h=300&fit=crop" class="img-fluid" alt="Wedding Envelope">
+                        <div class="portfolio-overlay">
+                            <div>Wedding Collection</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="portfolio-item fade-in">
+                        <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&h=300&fit=crop" class="img-fluid" alt="Business Envelope">
+                        <div class="portfolio-overlay">
+                            <div>Corporate Branding</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="portfolio-item fade-in">
+                        <img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=400&h=300&fit=crop" class="img-fluid" alt="Event Envelope">
+                        <div class="portfolio-overlay">
+                            <div>Special Events</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <h2 class="display-4 fw-bold mb-4">Ready to Create Something Amazing?</h2>
+                    <p class="lead mb-4">Let's bring your envelope design vision to life. Start your custom design journey today!</p>
+                    <!-- <button class="btn btn-custom btn-lg me-3">Get Started Now</button> -->
+                    <a href="designer.html" class="btn btn-custom2 me-3 mb-3">Get Started Now</a>
+                    <!-- <button class="btn btn-outline-light btn-lg">Contact Us</button> -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-section">
+        <div class="footer-overlay"></div>
+        <div class="container position-relative">
+            <div class="row py-5">
+                <div class="col-lg-6 col-md-6 mb-4">
+                    <div class="footer-brand">
+                        <h3 class="fw-bold mb-3">
+                            <i class="fas fa-envelope me-2 footer-icon"></i>Meralifafa
+                        </h3>
+                        <p class="mb-4">Transform your correspondence into works of art. We specialize in creating custom envelope designs that make every mail piece memorable and impactful.</p>
+                        <div class="footer-contact">
+                            <div class="contact-item mb-2">
+                                <i class="fas fa-phone me-2"></i>
+                                <span>+91 7045272671</span>
+                            </div>
+                            <div class="contact-item mb-2">
+                                <i class="fas fa-envelope me-2"></i>
+                                <span>design@meralifafa.in</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-map-marker-alt me-2"></i>
+                                <span>F201 - Tata Amantra</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5 class="footer-title mb-3">Services</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">Custom Design</a></li>
+                        <li><a href="#">Wedding Invitations</a></li>
+                        <li><a href="#">Corporate Branding</a></li>
+                        <li><a href="#">Event Stationery</a></li>
+                        <li><a href="#">Bulk Orders</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5 class="footer-title mb-3">Company</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Portfolio</a></li>
+                        <li><a href="#">Testimonials</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Press Kit</a></li>
+                    </ul>
+                </div>
+                
+                <!-- <div class="col-lg-4 col-md-6 mb-4">
+                    <h5 class="footer-title mb-3">Newsletter</h5>
+                    <p class="mb-3">Stay updated with our latest designs and exclusive offers!</p>
+                    <div class="newsletter-form">
+                        <div class="input-group mb-3">
+                            <input type="email" class="form-control newsletter-input" placeholder="Your email address" aria-label="Email">
+                            <button class="btn newsletter-btn" type="button">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="social-links-footer">
+                        <a href="#" class="social-link">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-pinterest-p"></i>
+                        </a>
+                    </div>
+                </div> -->
+            </div>
+            
+            <div class="footer-bottom">
+                <hr class="footer-divider">
+                <div class="row align-items-center" id="bottom-footer-row">
+                    <div class="col-md-6">
+                        <p class="copyright mb-0">&copy; 2025 Meralifafa. All rights reserved.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="footer-legal">
+                            <a href="#">Privacy Policy</a>
+                            <a href="#">Terms of Service</a>
+                            <a href="#">Cookie Policy</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Counter animation
+        function animateCounter(element) {
+            const target = parseInt(element.dataset.count);
+            const duration = 2000;
+            const step = target / (duration / 16);
+            let current = 0;
+
+            const timer = setInterval(() => {
+                current += step;
+                if (current >= target) {
+                    element.textContent = target;
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(current);
+                }
+            }, 16);
+        }
+
+        // Trigger counter animation when stats section is visible
+        const statsObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counters = entry.target.querySelectorAll('.stat-number');
+                    counters.forEach(counter => {
+                        animateCounter(counter);
+                    });
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        const statsSection = document.querySelector('.stats-section');
+        if (statsSection) {
+            statsObserver.observe(statsSection);
+        }
+
+        // Add hover effect to portfolio items
+        document.querySelectorAll('.portfolio-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.05) rotateY(5deg)';
+                this.style.transition = 'all 0.3s ease';
+            });
+
+            item.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1) rotateY(0deg)';
+            });
+        });
+
+        // Parallax effect for floating envelopes
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelectorAll('.floating-envelope');
+            
+            parallax.forEach((element, index) => {
+                const speed = 0.5 + (index * 0.1);
+                element.style.transform = `translateY(${scrolled * speed}px) rotate(${scrolled * 0.1}deg)`;
+            });
+        });
+
+        // Button click animations
+        document.querySelectorAll('.btn-custom').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                let ripple = document.createElement('span');
+                ripple.classList.add('ripple');
+                this.appendChild(ripple);
+
+                let x = e.clientX - e.target.offsetLeft;
+                let y = e.clientY - e.target.offsetTop;
+
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+
+        // Add CSS for ripple effect
+        const style = document.createElement('style');
+        style.textContent = `
+            .btn-custom {
+                position: relative;
+                overflow: hidden;
+            }
+            .ripple {
+                position: absolute;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.6);
+                transform: scale(0);
+                animation: ripple-animation 0.6s linear;
+                pointer-events: none;
+            }
+            @keyframes ripple-animation {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // setTimeout(() => {
+        //     const en = document.querySelector("#heroSubtitle .en-text");
+        //     const hi = document.querySelector("#heroSubtitle .hi-text");
+
+        //     gsap.to(en, {
+        //       opacity: 0,
+        //       duration: 1,
+        //       onComplete: () => {
+        //         en.classList.add("d-none");
+        //         hi.classList.remove("d-none");
+        //         gsap.fromTo(hi, { opacity: 0 }, { opacity: 1, duration: 1.2 });
+        //       }
+        //     });
+        //   }, 4000);
+
+        const en = document.querySelector("#heroSubtitle .en-text");
+          const hi = document.querySelector("#heroSubtitle .hi-text");
+
+          // Timeline for looping fade effect
+          const tl = gsap.timeline({ repeat: -1, repeatDelay: 2 });
+
+          tl.to(en, {
+            opacity: 0,
+            duration: 1,
+            delay: 3,
+            onComplete: () => {
+              en.classList.add("d-none");
+              hi.classList.remove("d-none");
+            }
+          })
+          .fromTo(hi, { opacity: 0 }, { opacity: 1, duration: 1 })
+          .to(hi, {
+            opacity: 0,
+            duration: 1,
+            delay: 3,
+            onComplete: () => {
+              hi.classList.add("d-none");
+              en.classList.remove("d-none");
+            }
+          })
+          .fromTo(en, { opacity: 0 }, { opacity: 1, duration: 1 });
+    </script>
+</body>
+</html>
